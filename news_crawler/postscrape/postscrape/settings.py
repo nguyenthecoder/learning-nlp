@@ -16,8 +16,31 @@ NEWSPIDER_MODULE = 'postscrape.spiders'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'postscrape (+http://www.yourdomain.com)'
 
+# Splash
+SPLASH_URL = 'http://localhost:8050'
+
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
+
+SPIDER_MIDDLEWARES = {
+    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
+
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+# ROBOTSTXT_OBEY = True
+
+# # Playwright settings
+# DOWNLOAD_HANDLERS = {
+#     "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+#     "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+# }
+# TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -86,3 +109,28 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# Enable ScrapySplash settings
+# SPLASH_URL = 'https://localhost:8050'
+# SPLASH_URL = 'http://192.168.59.103:8050'
+# DOWNLOADER_MIDDLEWARES = {
+#     'scrapy_splash.SplashCookiesMiddleware': 723,
+#     'scrapy_splash.SplashMiddleware': 725,
+#     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+# }
+# SPIDER_MIDDLEWARES = {
+#     'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+# }
+# DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+
+#Enable Scrapy-selenium
+
+# from shutil import which
+
+# SELENIUM_DRIVER_NAME = 'chrome'
+# SELENIUM_DRIVER_EXECUTABLE_PATH = which('chromedriver')
+# SELENIUM_DRIVER_ARGUMENTS=['--headless']  
+  
+# DOWNLOADER_MIDDLEWARES = {
+#      'scrapy_selenium.SeleniumMiddleware': 800
+#      }
